@@ -1,0 +1,7 @@
+name,shortDescription,age,languages,hobbies,workPosition,github,linkedin
+Alice,Full stack dev,27,English;German,chess;cycling,Frontend,https://github.com/alice,https://linkedin.com/in/alice
+Bob,Backend engineer,29,Enlish;Turkish,cycling;movies,Backend,https://github.com/bob,https://linkedin.com/in/bob
+Enes,A programmer,19,German;English;Turkish,chess,Backend,,
+mert,asd,20,English,,Tester,,
+Ismail,asd,25,Chinese;English;French;German,chess;cooking;cycling;gaming,Designer,,
+Melih,asdasdasdadsads,25,Chinese;English;French;German;Hindi,chess,Backend,,
