@@ -76,9 +76,9 @@ class WorkerManagementSystem:
                 elif choice == '5':
                     self.worker_manager.find_team()
                 elif choice == '6':
-                    self.edit_lists()
+                    self.worker_manager.edit_lists(self.data_manager)
                 elif choice == '7':
-                    self.change_admin_password()
+                    Auth.change_admin_password(self.admin_credentials, self.data_manager)
                 elif choice == '0':
                     if Confirm.ask("[yellow]Are you sure you want to exit?[/yellow]"):
                         console.print("[cyan]Goodbye![/cyan]")

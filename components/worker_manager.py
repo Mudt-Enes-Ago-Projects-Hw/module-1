@@ -360,3 +360,78 @@ class WorkerManager:
                 table.add_row(position, "No candidate found", "-")
 
         console.print(table)
+
+    def edit_lists(self, data_manager):
+        """Edit languages, hobbies, and positions"""
+        while True:
+            console.print("\n[bold cyan]Edit Lists[/bold cyan]")
+            choice = Prompt.ask(
+                "1 - Languages\n"
+                "2 - Hobbies\n"
+                "3 - Work Positions\n"
+                "0 - Back to main menu",
+                choices=['0', '1', '2', '3']
+            )
+
+            if choice == '0':
+                break
+            elif choice == '1':
+                self._edit_single_list('Languages', self.languages, data_manager.languages_file, data_manager)
+            elif choice == '2':
+                self._edit_single_list('Hobbies', self.hobbies, data_manager.hobbies_file, data_manager)
+            elif choice == '3':
+                self._edit_single_list('Work Positions', self.positions, data_manager.positions_file, data_manager)
+
+    def _edit_single_list(self, name: str, items: set, file_path, data_manager):
+        """Edit a single list"""
+        while True:
+            console.print(f"\n[bold cyan]Edit {name}[/bold cyan]")
+            console.print("\nCurrent items:")
+            for item in sorted(items):
+                console.print(f"  [green]•[/green] {item}")
+
+            choice = Prompt.ask(
+                "\n1 - Add item\n"
+                "2 - Remove item\n"
+                "0 - Back",
+                choices=['0', '1', '2']
+            )
+
+            if choice == '0':
+                break
+            elif choice == '1':
+                new_item = Prompt.ask(f"Enter new {name.lower()[:-1]}").strip()
+                if new_item:
+                    items.add(new_item)
+                    data_manager.save_simple_list(items, file_path)
+                    console.print("[green]Item added successfully![/green]")
+            elif choice == '2':
+                to_remove = self.ui.select_from_list(sorted(items), "Select item to remove")
+                if to_remove:
+                    item = to_remove[0]
+                    # Check if item is in use
+                    users = []
+                    for worker in self.workers:
+                        if (name == 'Languages' and item in worker.languages) or \
+                           (name == 'Hobbies' and item in worker.hobbies) or \
+                           (name == 'Work Positions' and item == worker.work_position):
+                            users.append(worker.name)
+
+                    if users:
+                        console.print(f"[yellow]Warning: This item is used by: {', '.join(users)}[/yellow]")
+                        if not Confirm.ask("Remove anyway? (will be removed from workers too)"):
+                            continue
+
+                        # Remove from workers
+                        for worker in self.workers:
+                            if name == 'Languages' and item in worker.languages:
+                                worker.languages.remove(item)
+                            elif name == 'Hobbies' and item in worker.hobbies:
+                                worker.hobbies.remove(item)
+                            elif name == 'Work Positions' and item == worker.work_position:
+                                worker.work_position = ''
+                        data_manager.save_workers(self.workers)
+
+                    items.remove(item)
+                    data_manager.save_simple_list(items, file_path)
+                    console.print("[green]Item removed successfully![/green]")

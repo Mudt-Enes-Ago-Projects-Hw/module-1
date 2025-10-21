@@ -1,7 +1,16 @@
 name,shortDescription,age,languages,hobbies,workPosition,github,linkedin
-Alice,Full stack dev,27,English;German,chess;cycling,Frontend,https://github.com/alice,https://linkedin.com/in/alice
-Bob,Backend engineer,29,Enlish;Turkish,cycling;movies,Backend,https://github.com/bob,https://linkedin.com/in/bob
-Enes,A programmer,19,German;English;Turkish,chess,Backend,,
-mert,asd,20,English,,Tester,,
-Ismail,asd,25,Chinese;English;French;German,chess;cooking;cycling;gaming,Designer,,
-Melih,asdasdasdadsads,25,Chinese;English;French;German;Hindi,chess,Backend,,
+Alice Chen,Junior QA lead with 4 years experience,28,English;Chinese,gaming;reading,Tester,https://github.com/alicechen,https://linkedin.com/in/alicechen
+Bob Mueller,Frontend expert with React skills,32,English;German,movies;cooking,Frontend,https://github.com/bobmueller,https://linkedin.com/in/bobmueller
+Charlie Smith,QA engineer with automation expertise,25,English,chess;gaming,Tester,https://github.com/charliesmith,https://linkedin.com/in/charliesmith
+Diana Kumar,Full-stack developer passionate about UX,29,English;Hindi,reading;movies,Frontend,https://github.com/dianakumar,https://linkedin.com/in/dianakumar
+Ethan Yilmaz,Backend architect with microservices experience,35,English;Turkish,hiking;cooking,Backend,https://github.com/ethanyilmaz,https://linkedin.com/in/ethanyilmaz
+Fiona Wang,Frontend designer with eye for detail,24,English;Chinese,movies;reading,Frontend,https://github.com/fionawang,https://linkedin.com/in/fionawang
+George Fischer,Test automation specialist,31,German;English,chess;hiking,Tester,https://github.com/georgefischer,https://linkedin.com/in/georgefischer
+Hannah Patel,Backend developer focused on databases,27,English;Hindi,gaming;cooking,Backend,https://github.com/hannahpatel,https://linkedin.com/in/hannahpatel
+Julia Schmidt,Senior QA lead with 8 years experience,38,German;English,hiking;movies,Tester,https://github.com/juliaschmidt,https://linkedin.com/in/juliaschmidt
+Kevin Li,Backend engineer specializing in cloud,26,Chinese;English,gaming;chess,Backend,https://github.com/kevinli,https://linkedin.com/in/kevinli
+Nina Gupta,Backend developer with API design skills,33,Hindi;English,hiking;reading,Backend,https://github.com/ninagupta,https://linkedin.com/in/ninagupta
+Oliver Weber,Frontend specialist in Vue.js,28,German;English;Turkish,chess;movies,Frontend,https://github.com/oliverweber,https://linkedin.com/in/oliverweber
+Raj Singh,Senior backend developer with security focus,42,English;Hindi,reading;hiking,Backend,https://github.com/rajsingh,https://linkedin.com/in/rajsingh
+Sofija ,Frontend developer with strong CSS skills,25,English;Macedonian,movies;cooking,Frontend,https://github.com/sofiapetrovic,https://linkedin.com/in/sofiapetrovic
+Thomas Schneider,Lead tester with CI/CD expertise,36,German;English,chess;hiking,Tester,https://github.com/thomasschneider,https://linkedin.com/in/thomasschneider
