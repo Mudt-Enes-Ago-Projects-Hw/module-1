@@ -29,15 +29,7 @@ git clone <repository-url>
 cd assignementOnePython
 ```
 
-2. Create a virtual environment:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # On macOS/Linux
-# or
-.venv\Scripts\activate  # On Windows
-```
-
-3. Install dependencies:
+2. Install dependencies:
 ```bash
 pip install rich bcrypt
 ```
@@ -47,7 +39,6 @@ pip install rich bcrypt
 ```
 assignementOnePython/
 ├── main.py                 # Main application entry point
-├── worker_management.py    # Legacy monolithic version (deprecated)
 ├── components/             # Modular components
 │   ├── __init__.py
 │   ├── worker.py          # Worker data class
@@ -91,17 +82,16 @@ python main.py
 
 The system uses a percentage-based compatibility calculation:
 
-### Hobbies (30 points max)
+### Hobbies (40 points max)
 - Calculates what percentage of person A's hobbies match person B's
-- Example: If A has 1 hobby and B has it → 100% → 30 points
+- Example: If A has 1 hobby and B has it → 100% → 40 points
 
-### Languages (30 points max)
+### Languages (40 points max)
 - Same percentage logic as hobbies
-- Example: If A speaks 2 languages and B speaks both → 100% → 30 points
+- Example: If A speaks 2 languages and B speaks both → 100% → 40 points
 
-### Age (40 points max)
-- ≤2 years difference: 40 points
-- ≤5 years difference: 25 points
+### Age (20 points max)
+- ≤5 years difference: 20 points
 - ≤10 years difference: 10 points
 - >10 years difference: 0 points
 

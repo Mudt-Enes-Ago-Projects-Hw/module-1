@@ -13,7 +13,7 @@ class CompatibilityCalculator:
         # If user_a has hobbies, calculate what percentage of their hobbies match
         if user_a.hobbies:
             hobby_percentage = (hobby_matches / len(user_a.hobbies)) * 100
-            hobby_points = (hobby_percentage / 100) * 30  # Max 30 points for hobbies
+            hobby_points = (hobby_percentage / 100) * 40  # Max 40 points for hobbies
         else:
             hobby_percentage = 0
             hobby_points = 0
@@ -21,16 +21,14 @@ class CompatibilityCalculator:
         # Same for languages
         if user_a.languages:
             lang_percentage = (lang_matches / len(user_a.languages)) * 100
-            lang_points = (lang_percentage / 100) * 30  # Max 30 points for languages
+            lang_points = (lang_percentage / 100) * 40  # Max 40 points for languages
         else:
             lang_percentage = 0
             lang_points = 0
         
-        # Age points (max 40 points)
-        if age_diff <= 2:
-            age_points = 40
-        elif age_diff <= 5:
-            age_points = 25
+        # Age points (max 20 points)
+        if age_diff <= 5:
+            age_points = 20
         elif age_diff <= 10:
             age_points = 10
         else:
