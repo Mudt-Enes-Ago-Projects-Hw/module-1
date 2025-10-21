@@ -13,10 +13,7 @@ import sys
 sys.dont_write_bytecode = True
 
 from pathlib import Path
-from components import (
-    Worker, DataManager, CompatibilityCalculator,
-    UIUtils, console, Auth
-)
+from components import DataManager, console, Auth
 from components.worker_manager import WorkerManager
 from rich.panel import Panel
 from rich.prompt import Prompt, Confirm
@@ -72,9 +69,8 @@ class WorkerManagementSystem:
                     if worker:
                         self.data_manager.save_workers(self.workers)
                 elif choice == '3':
-                    result = self.worker_manager.edit_worker()
-                    # Save after any edit operation
-                    self.data_manager.save_workers(self.workers)
+                    if self.worker_manager.edit_worker():
+                        self.data_manager.save_workers(self.workers)
                 elif choice == '4':
                     self.worker_manager.compare_workers()
                 elif choice == '5':

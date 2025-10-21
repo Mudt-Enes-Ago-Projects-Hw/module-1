@@ -138,10 +138,146 @@ The application includes `sys.dont_write_bytecode = True` to prevent Python from
 3. Make your changes
 4. Submit a pull request
 
-## License
-
-This project is created for educational purposes.
 
 ## Authors
 
+Enes Ago
+
 Created as part of university project assignment.
+
+---
+
+## Python Decorators Explained
+
+This project uses several Python decorators to make the code cleaner and more maintainable. Here's what they do:
+
+### `@dataclass` - Automatic Class Generation
+
+**Without `@dataclass` (manual approach):**
+```python
+class Worker:
+    def __init__(self, name, short_description, age, languages, hobbies, 
+                 work_position, github, linkedin):
+        self.name = name
+        self.short_description = short_description
+        self.age = age
+        self.languages = languages
+        self.hobbies = hobbies
+        self.work_position = work_position
+        self.github = github
+        self.linkedin = linkedin
+    
+    def __repr__(self):
+        return (f"Worker(name={self.name}, short_description={self.short_description}, "
+                f"age={self.age}, languages={self.languages}, hobbies={self.hobbies}, "
+                f"work_position={self.work_position}, github={self.github}, "
+                f"linkedin={self.linkedin})")
+    
+    def __eq__(self, other):
+        if not isinstance(other, Worker):
+            return False
+        return (self.name == other.name and 
+                self.short_description == other.short_description and
+                self.age == other.age and
+                self.languages == other.languages and
+                self.hobbies == other.hobbies and
+                self.work_position == other.work_position and
+                self.github == other.github and
+                self.linkedin == other.linkedin)
+```
+
+**With `@dataclass` (our approach):**
+```python
+from dataclasses import dataclass
+from typing import List
+
+@dataclass
+class Worker:
+    name: str
+    short_description: str
+    age: int
+    languages: List[str]
+    hobbies: List[str]
+    work_position: str
+    github: str
+    linkedin: str
+```
+
+**What `@dataclass` generates automatically:**
+- `__init__()` - Constructor method
+- `__repr__()` - String representation
+- `__eq__()` - Equality comparison
+- And more!
+
+---
+
+### `@classmethod` - Alternative Constructors
+
+**Without `@classmethod`:**
+```python
+# Manual parsing required every time
+worker = Worker(
+    name=row['name'],
+    short_description=row['shortDescription'],
+    age=int(row['age']),
+    languages=row['languages'].split(';') if row['languages'] else [],
+    hobbies=row['hobbies'].split(';') if row['hobbies'] else [],
+    work_position=row['workPosition'],
+    github=row['github'],
+    linkedin=row['linkedin']
+)
+```
+
+**With `@classmethod`:**
+```python
+@classmethod
+def from_csv_row(cls, row: Dict[str, str]) -> 'Worker':
+    return cls(
+        name=row['name'],
+        short_description=row['shortDescription'],
+        age=int(row['age']),
+        languages=row['languages'].split(';') if row['languages'] else [],
+        hobbies=row['hobbies'].split(';') if row['hobbies'] else [],
+        work_position=row['workPosition'],
+        github=row['github'],
+        linkedin=row['linkedin']
+    )
+
+# Usage: Simple one-liner
+worker = Worker.from_csv_row(row)
+```
+
+---
+
+### `@staticmethod` - Utility Functions
+
+**Without `@staticmethod`:**
+```python
+class UIUtils:
+    def select_from_list(self, items, prompt):
+        return items[0]
+
+ui = UIUtils()  # Need to create instance
+result = ui.select_from_list(items, "Choose")
+```
+
+**With `@staticmethod`:**
+```python
+class UIUtils:
+    @staticmethod
+    def select_from_list(items, prompt):
+        return items[0]
+
+result = UIUtils.select_from_list(items, "Choose")  # No instance needed
+```
+
+---
+
+### Comparison Table
+
+| Decorator | First Parameter | Use Case | Example |
+|-----------|----------------|----------|---------|
+| **(none)** | `self` | Access instance data | `def get_name(self): return self.name` |
+| `@classmethod` | `cls` | Factory methods, alternative constructors | `def from_csv(cls, data): return cls(...)` |
+| `@staticmethod` | *none* | Utility functions related to class | `def validate_url(url): return is_valid` |
+| `@dataclass` | *N/A* | Auto-generate `__init__`, `__repr__`, etc. | Applied to entire class |
