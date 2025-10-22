@@ -12,18 +12,11 @@ class Auth:
         """Verify admin login credentials"""
         console.print("\n[bold cyan]Login Required[/bold cyan]")
         
-        # Get username (use default if only one)
-        if len(admin_credentials) == 1:
-            username = next(iter(admin_credentials))
-        else:
-            username = Prompt.ask("Username")
-            if username not in admin_credentials:
-                console.print("[red]Invalid username[/red]")
-                return False
-
-        # Verify password
+        # Get password only
         password = getpass.getpass("Password: ")
-        stored_hash = admin_credentials[username]
+        
+        # Get the stored hash (assuming single admin)
+        stored_hash = list(admin_credentials.values())[0]
         
         if bcrypt.checkpw(password.encode(), stored_hash.encode()):
             console.print("[green]Login successful![/green]")
@@ -38,15 +31,12 @@ class Auth:
         console.print("\n[bold cyan]Change Admin Password[/bold cyan]")
         
         # Verify old password
-        username = Prompt.ask("Enter your username")
         old_password = getpass.getpass("Enter current password: ")
         
-        # Check credentials
-        if username not in admin_credentials:
-            console.print("[red]Invalid username[/red]")
-            return False
-            
-        if not bcrypt.checkpw(old_password.encode(), admin_credentials[username].encode()):
+        # Get the stored hash (assuming single admin)
+        stored_hash = list(admin_credentials.values())[0]
+        
+        if not bcrypt.checkpw(old_password.encode(), stored_hash.encode()):
             console.print("[red]Incorrect password[/red]")
             return False
 
@@ -64,6 +54,7 @@ class Auth:
             break
 
         # Update password
+        username = list(admin_credentials.keys())[0]
         admin_credentials[username] = bcrypt.hashpw(new_password.encode(), bcrypt.gensalt()).decode()
         data_manager.save_admin_credentials(admin_credentials)
         console.print("[green]Password changed successfully![/green]")
